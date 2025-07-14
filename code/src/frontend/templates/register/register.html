@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrieren</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='register/register.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Registrieren</h2>
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <div class="flash">{{ messages[0] }}</div>
+          {% endif %}
+        {% endwith %}
+        <form method="POST">
+            <label for="username">Benutzername:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Passwort:</label>
+            <input type="password" id="password" name="password" required>
+
+            <label class="checkbox">
+                <input type="checkbox" name="terms" required>
+                Ich akzeptiere die <a href="#">Nutzungsbedingungen</a>
+            </label>
+
+            <button type="submit">Registrieren</button>
+        </form>
+        <p>Schon registriert? <a href="{{ url_for('login.login') }}">Login</a></p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,4 @@
+- Datenbank inizialieren auf containerbasis
+- Daten persistent speichern wenn conn close
+- Daten wieder in Datenbank reinpacken wenn start
+- Makefile für die Übersicht

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='login/login.css') }}">
+    <style>
+      .login-flex {
+        display: flex;
+        gap: 32px;
+        justify-content: center;
+        align-items: flex-start;
+      }
+      .qr-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-width: 160px;
+      }
+      .qr-section img {
+        width: 140px;
+        height: 140px;
+        margin-bottom: 8px;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        background: #fff;
+      }
+      .qr-section .qr-text {
+        font-size: 0.97em;
+        color: #555;
+        text-align: center;
+      }
+      @media (max-width: 600px) {
+        .login-flex { flex-direction: column; align-items: stretch; }
+        .qr-section { align-items: center; margin-bottom: 24px; }
+      }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Login</h2>
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <div class="flash">{{ messages[0] }}</div>
+          {% endif %}
+        {% endwith %}
+        <div class="login-flex">
+            <!-- QR-Code links -->
+            <div class="qr-section">
+                <img src="{{ url_for('login.login_qr') }}" alt="Login QR-Code">
+                <div class="qr-text">oder ganz bequem<br>mit QR-Code</div>
+            </div>
+            <!-- Login-Formular rechts -->
+            <form method="POST" style="min-width: 180px;">
+                <label for="username">Benutzername:</label>
+                <input type="text" id="username" name="username" required>
+
+                <label for="password">Passwort:</label>
+                <input type="password" id="password" name="password" required>
+
+                <button type="submit">Login</button>
+                <p style="margin-top:16px;">Noch keinen Account? <a href="{{ url_for('register.register') }}">Registrieren</a></p>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

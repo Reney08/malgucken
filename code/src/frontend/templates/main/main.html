@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ url_for('static', filename='pictures/sva-logo-2024nobackground.png') }}" type="image/png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='main/main.css') }}">
+    <title>Bar Roboter</title>
+</head>
+<body>
+    <header class="headerbox">
+        <a href="/"><img src="{{ url_for('static', filename='pictures/sva-logo-2024.png') }}" class="svalogo"></a>
+        <a href="/" class="robotname">ROBOTNAME</a>
+    </header>
+
+    <div class="cocktail-grid">
+        {% for cocktail in cocktails %}
+        <div class="box" onclick="selectCocktail('{{ cocktail.Name }}')">
+            <span class="getränketitel">{{ cocktail.Name }}</span>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Logout Button unten links -->
+    <form action="/logout" method="post" class="logout-form">
+        <button type="submit" class="logout-btn">Logout</button>
+    </form>
+
+    <script>
+        function selectCocktail(name) {
+            console.log("Cocktail gewählt:", name); // Browser-Konsole
+
+            // An das Backend schicken:
+            fetch('/main/cocktail_selected', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ name: name })
+            });
+        }
+    </script>
+</body>
+</html>

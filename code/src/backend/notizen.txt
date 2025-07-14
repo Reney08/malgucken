@@ -1,0 +1,6 @@
+- login seite machen in HTML
+    - username
+    - PW in sha 256 speichern
+    - tracking haken einbauen
+
+- weiterleiten auf Davids Seite
