@@ -9,8 +9,15 @@
 </head>
 <body>
     <header class="headerbox">
-        <a href="/"><img src="{{ url_for('static', filename='pictures/sva-logo-2024.png') }}" class="svalogo"></a>
-        <a href="/" class="robotname">ROBOTNAME</a>
+        <div class="header-left">
+            {% include '/menu/burger_menu.html' %}
+        </div>
+        <div class="header-right">
+            <a href="{{ url_for('main.main') }}">
+                <img src="{{ url_for('static', filename='pictures/sva-logo-2024.png') }}" class="svalogo">
+            </a>
+            <a href="{{ url_for('main.main') }}" class="robotname">ROBOTNAME</a>
+        </div>
     </header>
 
     <div class="cocktail-grid">
@@ -28,9 +35,8 @@
 
     <script>
         function selectCocktail(name) {
-            console.log("Cocktail gewählt:", name); // Browser-Konsole
+            console.log("Cocktail gewählt:", name);
 
-            // An das Backend schicken:
             fetch('/main/cocktail_selected', {
                 method: 'POST',
                 headers: {

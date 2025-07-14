@@ -1,6 +1,21 @@
-- login seite machen in HTML
-    - username
-    - PW in sha 256 speichern
-    - tracking haken einbauen
+- selected_coctailseite
+    - anzeigen der beschreibung
+    - start mixing button
 
-- weiterleiten auf Davids Seite
+- evtl auf der sel_cock seite oder auf neue seite progressbar einpfegen
+- wenn fertig, dann return to main.html
+
+- burgermenu an der seite
+    - access zu den einzelnen unterseiten
+        - stepmotor
+        - servo
+        - waage
+        - pumpe
+        - led
+        - generelle statusseite
+
+- userrollen (  kein user - nur main.html seite
+                user - dann burgermenu mit nen paar funktionen
+                admin - zugriff auf logs und maschinenindo (füllstand etc.)
+                sysadmin - vollzugriff
+                universalbenutzer, der rechte verteilen kann)

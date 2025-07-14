@@ -1,5 +1,11 @@
-- login Seite bauen
-    - Feld um Username anzugeben
-    - Feld um PW anzugeben
-    - checkmark für nutzungsbedingungen
+- selected_cocktail
+    - bild des cocktails anzeigen lassen
+    - description anzeigen lassen ("evtl durch markdown?")
+    - start_mixin button mittig
+
+- burgermenu an die seite als html extend
+
+- adminroute mit /admin um rollen zu verteilen
+    - rollenverteilung nur accessable für sys_admin und universialbenutzer
+    - rollenverteilung einfach per checkmark
 

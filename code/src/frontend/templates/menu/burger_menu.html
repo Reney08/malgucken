@@ -1,0 +1,17 @@
+<!-- templates/menu/burger_menu.html -->
+<link rel="stylesheet" href="{{ url_for('static', filename='menu/burger_menu.css') }}">
+<nav class="burger-menu">
+    <div class="burger-icon" onclick="toggleMenu()">&#9776;</div>
+    <ul id="menu-links" class="menu-links">
+        <li><a href="{{ url_for('main.main') }}">Home</a></li>
+        <li><a href="#">Cocktails</a></li>
+        <li><a href="#">Über</a></li>
+        <!-- weitere Links -->
+    </ul>
+</nav>
+<script>
+function toggleMenu() {
+    var menu = document.getElementById('menu-links');
+    menu.classList.toggle('open');
+}
+</script>

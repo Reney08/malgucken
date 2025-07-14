@@ -16,5 +16,5 @@ def main():
 def cocktail_selected():
     data = request.get_json()
     name = data.get('name')
-    print(f"Cocktail gewählt: {name}")  # Wird im Terminal ausgegeben!
-    return '', 204  # Kein Inhalt zurückgeben
+    print(f"Cocktail gewählt: {name}")
+    return '', 204
