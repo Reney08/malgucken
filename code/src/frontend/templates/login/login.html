@@ -10,12 +10,24 @@
         gap: 32px;
         justify-content: center;
         align-items: flex-start;
+        flex-wrap: wrap;
       }
-      .qr-section {
+      .qr-section, .login-form {
+        flex: 1 1 160px;
         display: flex;
         flex-direction: column;
+        margin-bottom: 0;
+        background: none;
+      }
+      .qr-section {
         align-items: center;
         min-width: 160px;
+        max-width: 200px;
+      }
+      .login-form {
+        align-items: stretch;
+        min-width: 160px;
+        max-width: 200px;
       }
       .qr-section img {
         width: 140px;
@@ -25,14 +37,21 @@
         box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         background: #fff;
       }
-      .qr-section .qr-text {
+      .qr-text {
         font-size: 0.97em;
         color: #555;
         text-align: center;
       }
+      .login-form label,
+      .login-form input,
+      .login-form button,
+      .login-form p {
+        width: 100%;
+        box-sizing: border-box;
+      }
       @media (max-width: 600px) {
         .login-flex { flex-direction: column; align-items: stretch; }
-        .qr-section { align-items: center; margin-bottom: 24px; }
+        .qr-section, .login-form { max-width: none; }
       }
     </style>
 </head>
@@ -44,24 +63,31 @@
             <div class="flash">{{ messages[0] }}</div>
           {% endif %}
         {% endwith %}
+
         <div class="login-flex">
-            <!-- QR-Code links -->
+            <!-- QR-Code -->
             <div class="qr-section">
                 <img src="{{ url_for('login.login_qr') }}" alt="Login QR-Code">
                 <div class="qr-text">oder ganz bequem<br>mit QR-Code</div>
             </div>
-            <!-- Login-Formular rechts -->
-            <form method="POST" style="min-width: 180px;">
+
+            <!-- Login-Formular -->
+            <form method="POST" class="login-form">
                 <label for="username">Benutzername:</label>
                 <input type="text" id="username" name="username" required>
-
                 <label for="password">Passwort:</label>
                 <input type="password" id="password" name="password" required>
-
                 <button type="submit">Login</button>
-                <p style="margin-top:16px;">Noch keinen Account? <a href="{{ url_for('register.register') }}">Registrieren</a></p>
+                <p style="margin-top:16px;">
+                    Noch keinen Account?
+                    <a href="{{ url_for('register.register') }}">Registrieren</a>
+                </p>
             </form>
         </div>
+        <!-- Gast-Login Button unter der Flexbox -->
+        <form action="{{ url_for('login.gast_login') }}" method="get" style="margin-top: 24px;">
+            <button type="submit" class="gast-btn">Ohne Login weitermachen</button>
+        </form>
     </div>
 </body>
 </html>

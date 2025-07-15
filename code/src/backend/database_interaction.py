@@ -19,3 +19,24 @@ def get_cocktails():
     cocktails = cur.fetchall()
     cur.close()
     return cocktails
+
+def get_cocktail_by_name(name):
+    cur = conn.cursor(dictionary=True)
+    cur.execute("SELECT * FROM Cocktail WHERE Name = ?", (name,))
+    row = cur.fetchone()
+    cur.close()
+    return row
+
+def get_ingredients_for_cocktail(cocktail_name):
+    cur = conn.cursor(dictionary=True)
+    cur.execute("""
+        SELECT Z.Name AS Zutat, R.Menge AS Menge
+        FROM Rezept R
+        JOIN Cocktail C ON C.CocktailID = R.CocktailID
+        JOIN Zutat Z ON Z.ZutatID = R.ZutatID
+        WHERE C.Name = ?
+        ORDER BY R.RezeptPos ASC
+    """, (cocktail_name,))
+    zutaten = cur.fetchall()
+    cur.close()
+    return zutaten

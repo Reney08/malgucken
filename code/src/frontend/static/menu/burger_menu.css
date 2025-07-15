@@ -1,50 +1,146 @@
 /* burger_menu.css */
-.burger-menu {
-    position: relative;
-    display: flex;
-    align-items: center;
-    height: 100%;
+
+body {
+    margin: 0;
+    font-family: sans-serif;
 }
 
+/* Burger Icon */
 .burger-icon {
+    position: fixed;
+    top: 20px;
+    left: 20px;
     font-size: 36px;
     color: #fff;
+    background: #0081C6;
+    border-radius: 50%;
+    padding: 10px 16px;
     cursor: pointer;
-    padding: 10px;
+    z-index: 1100;
     user-select: none;
+    box-shadow: 0 2px 10px #00538055;
+    transition: background 0.2s;
 }
 
+.burger-icon:hover {
+    background: #005380;
+}
+
+/* Menüleiste */
 .menu-links {
-    display: none;
-    position: absolute;
-    top: 50px;
-    left: 0;
+    position: fixed;
+    top: 0;
+    left: -260px;  /* versteckt */
+    width: 250px;
+    height: 100vh;
     background: #222;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px #005380;
-    padding: 10px 0;
-    min-width: 150px;
-    z-index: 1000;
+    box-shadow: 2px 0 10px #005380;
+    padding: 70px 0 0 0;
+    border-radius: 0 12px 12px 0;
+    transition: left 0.3s cubic-bezier(0.7,0,0.3,1);
+    z-index: 1050;
+    display: block;
 }
 
 .menu-links.open {
-    display: block;
+    left: 0;
 }
 
 .menu-links li {
     list-style: none;
-    margin: 0;
-    padding: 0;
 }
 
 .menu-links a {
     display: block;
     color: #fff;
-    padding: 10px 20px;
+    padding: 18px 32px;
     text-decoration: none;
-    transition: background 0.2s;
+    font-size: 1.12em;
+    transition: background 0.2s, color 0.2s;
 }
 
 .menu-links a:hover {
     background: #0081C6;
+    color: #fff;
 }
+
+/* Overlay, wenn Menü offen */
+#menu-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.25);
+    z-index: 1000;
+    transition: background 0.2s;
+}
+
+#menu-overlay.open {
+    display: block;
+}
+
+/* Responsives Design */
+@media (max-width: 600px) {
+    .menu-links {
+        width: 78vw;
+        min-width: 150px;
+        max-width: 320px;
+    }
+}
+
+.cocktail-detail-container {
+    max-width: 800px;
+    margin: 80px auto;
+    background: #111;
+    border: 3px solid #0081C6;
+    border-radius: 12px;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 0 40px #00538088;
+}
+
+.cocktail-detail-container h1 {
+    font-size: 40px;
+    color: #fff;
+    margin-bottom: 20px;
+    text-shadow: -2px 2px 6px #0081C6;
+}
+
+.cocktail-beschreibung {
+    color: #ccc;
+    font-size: 20px;
+    margin-top: 20px;
+    line-height: 1.6;
+}
+
+.cocktail-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    border: 2px solid #0081C6;
+    box-shadow: 0 0 20px #005380;
+    margin-top: 20px;
+}
+
+.cocktail-link {
+    display: inline-block;
+    margin-top: 30px;
+    color: #fff;
+    background: #0081C6;
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+.cocktail-link:hover {
+    background: #005380;
+}
+
+.cocktail-verfuegbar {
+    margin-top: 30px;
+    font-size: 18px;
+    color: #aaa;
+}
+

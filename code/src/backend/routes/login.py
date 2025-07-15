@@ -34,3 +34,9 @@ def login_qr():
     buf.seek(0)
     return send_file(buf, mimetype='image/png')
 
+@login_bp.route('/gast-login')
+def gast_login():
+    session['logged_in'] = True
+    session['username'] = 'Max Mustermann'
+    session['is_guest'] = True  # Optional für weitere Beschränkungen
+    return redirect(url_for('main.main'))

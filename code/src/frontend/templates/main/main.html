@@ -8,6 +8,7 @@
     <title>Bar Roboter</title>
 </head>
 <body>
+    <!-- Header mit Logo und Burger Menü -->
     <header class="headerbox">
         <div class="header-left">
             {% include '/menu/burger_menu.html' %}
@@ -20,11 +21,12 @@
         </div>
     </header>
 
+    <!-- Cocktail-Grid -->
     <div class="cocktail-grid">
         {% for cocktail in cocktails %}
-        <div class="box" onclick="selectCocktail('{{ cocktail.Name }}')">
-            <span class="getränketitel">{{ cocktail.Name }}</span>
-        </div>
+            <a href="{{ url_for('main.cocktail_detail', cocktail_name=cocktail.Name) }}" class="box">
+                <span class="getränketitel">{{ cocktail.Name }}</span>
+            </a>
         {% endfor %}
     </div>
 
@@ -32,19 +34,5 @@
     <form action="/logout" method="post" class="logout-form">
         <button type="submit" class="logout-btn">Logout</button>
     </form>
-
-    <script>
-        function selectCocktail(name) {
-            console.log("Cocktail gewählt:", name);
-
-            fetch('/main/cocktail_selected', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ name: name })
-            });
-        }
-    </script>
 </body>
 </html>

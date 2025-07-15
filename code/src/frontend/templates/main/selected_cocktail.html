@@ -1,10 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="{{ url_for('static', filename='pictures/sva-logo-2024nobackground.png') }}" type="image/png">
+    <!-- Hauptstil -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='main/main.css') }}">
+    <!-- Cocktail-Detail-Stil -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='main/selected_cocktail.css') }}">
+    <title>{{ cocktail.Name }} – Bar Roboter</title>
 </head>
-<body>
+<!-- Zubereiten-Button -->
+<div class="zubereiten-container">
+    <form method="post" action="#">
+        <button type="submit" class="zubereiten-button">Zubereiten</button> <!-- Button ohne Funktion, optional -->
+    </form>
+</div>
 
-</body>
-</html>
+<!-- Hauptbereich: links Bild, rechts Infos -->
+<div class="cocktail-detail-grid">
+    <div class="cocktail-image-column">
+        {% if cocktail.Bild %}
+            <img src="data:image/png;base64,{{ cocktail.Bild | b64encode | decode('utf-8') }}" alt="{{ cocktail.Name }}" class="cocktail-image" />
+        {% else %}
+            <img src="{{ url_for('static', filename='pictures/default-drink.png') }}" alt="Kein Bild" class="cocktail-image" />
+        {% endif %}
+    </div>
+
+    <div class="cocktail-info-column">
+        <h1 class="getränketitel">{{ cocktail.Name }}</h1>
+        <p class="cocktail-beschreibung">{{ cocktail.Beschreibung or "Keine Beschreibung vorhanden." }}</p>
+
+        {% if zutaten %}
+            <h2 class="zutaten-titel">Zutaten</h2>
+            <ul class="zutatenliste">
+                {% for zutat in zutaten %}
+                    <li>{{ zutat.Zutat }} – {{ zutat.Menge }} cl</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% if cocktail.ExtLink %}
+            <a href="{{ cocktail.ExtLink }}" class="mehr-button" target="_blank">Mehr erfahren</a>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Button unten links: Zurück -->
+<a href="{{ url_for('main.main') }}" class="zurueck-button">← Zurück zur Übersicht</a>
