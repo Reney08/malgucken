@@ -18,11 +18,18 @@
     transition: all 0.3s ease;
 }
 
-.zubereiten-button:hover {
+.zubereiten-button:hover:enabled {
     background: #005380;
     box-shadow: 0 6px 30px #0081C6dd;
 }
 
+.zubereiten-button:disabled {
+    background: #555;
+    opacity: 0.5;
+    cursor: default;
+}
+
+/* Detail-Grid */
 .cocktail-detail-grid {
     display: flex;
     justify-content: center;
@@ -49,6 +56,7 @@
     color: #fff;
 }
 
+/* Titel und Beschreibung */
 .getränketitel {
     font-size: 40px;
     text-shadow: -2px 2px 6px #0081C6;
@@ -62,6 +70,7 @@
     line-height: 1.6;
 }
 
+/* Zutaten */
 .zutaten-titel {
     margin-top: 30px;
     font-size: 24px;
@@ -79,6 +88,7 @@
     font-size: 18px;
 }
 
+/* Link zum externen Rezept */
 .mehr-button {
     display: inline-block;
     margin-top: 30px;
@@ -99,6 +109,7 @@
     box-shadow: 0 0 20px #0081C6;
 }
 
+/* Zurück-Button */
 .zurueck-button {
     position: fixed;
     left: 30px;
@@ -119,4 +130,61 @@
     background: #0081C6;
     color: #fff;
     box-shadow: 0 4px 20px #0081C6;
+}
+
+/* --- Ausgabe: Mix-Sequenz --- */
+.dispense-sequence {
+    margin: 40px auto 60px auto;
+    padding: 20px 30px;
+    background: #111;
+    border-radius: 12px;
+    border: 1px solid #0081C6;
+    box-shadow: 0 0 20px #00538055;
+    max-width: 800px;
+    color: #fff;
+}
+
+.dispense-sequence h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    text-align: center;
+    color: #00aaff;
+    text-shadow: 0 0 6px #0081C6;
+}
+
+.dispense-sequence ol {
+    padding-left: 20px;
+}
+
+.dispense-sequence li {
+    margin-bottom: 12px;
+    font-size: 18px;
+    line-height: 1.5;
+    border-bottom: 1px dashed #00538044;
+    padding-bottom: 6px;
+}
+
+/* --- Media Queries für Responsivität --- */
+@media (max-width: 768px) {
+    .cocktail-detail-grid {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .cocktail-image {
+        max-height: 300px;
+    }
+
+    .zubereiten-button {
+        font-size: 20px;
+        padding: 12px 30px;
+    }
+
+    .dispense-sequence {
+        padding: 15px;
+    }
+
+    .dispense-sequence h2 {
+        font-size: 20px;
+    }
 }

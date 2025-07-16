@@ -16,3 +16,4 @@ def protected_route():
     if session.get('is_guest'):
         flash("Nicht verfügbar im Gast-Modus!")
         return redirect(url_for('main.main'))
+    return None

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Live Logs – Barbot</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='debug/logs.css') }}">
+    <script>
+        async function refreshLogs() {
+            try {
+                let response = await fetch("/debug/logs/api");
+                let logs = await response.json();
+                const logContainer = document.getElementById("log-container");
+                logContainer.innerHTML = logs.map(line => `<pre>${line}</pre>`).join("");
+            } catch (e) {
+                console.error("Fehler beim Laden der Logs:", e);
+            }
+        }
+
+        setInterval(refreshLogs, 1000); // alle 1 Sekunde Logs abfragen
+        window.onload = refreshLogs;
+
+        async function refreshLogs() {
+    try {
+        let response = await fetch("/debug/logs/api");
+        let data = await response.json();
+        const container = document.getElementById("log-container");
+
+        container.innerHTML = data.logs.map(line => `<pre>${line}</pre>`).join("");
+
+        const statusBar = document.getElementById("status-bar");
+        if (data.running) {
+            statusBar.innerText = "🚀 Zubereitung läuft...";
+        } else {
+            statusBar.innerText = "✅ Bereit.";
+        }
+    } catch (e) {
+        console.error("Fehler beim Laden der Logs:", e);
+    }
+}
+
+    </script>
+</head>
+<body>
+    <h1>🔍 Live-Logs</h1>
+    <div id="status-bar" style="margin-bottom: 10px; font-weight: bold;"></div>
+    <div id="log-container" class="logbox">Lade Logs...</div>
+</body>
+</html>

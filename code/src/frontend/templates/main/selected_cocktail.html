@@ -1,48 +1,78 @@
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="{{ url_for('static', filename='pictures/sva-logo-2024nobackground.png') }}" type="image/png">
-    <!-- Hauptstil -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='main/main.css') }}">
-    <!-- Cocktail-Detail-Stil -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='main/selected_cocktail.css') }}">
     <title>{{ cocktail.Name }} – Bar Roboter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='main/selected_cocktail.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='pictures/sva-logo-2024nobackground.png') }}" type="image/png">
 </head>
-<!-- Zubereiten-Button -->
-<div class="zubereiten-container">
-    <form method="post" action="#">
-        <button type="submit" class="zubereiten-button">Zubereiten</button> <!-- Button ohne Funktion, optional -->
-    </form>
-</div>
 
-<!-- Hauptbereich: links Bild, rechts Infos -->
-<div class="cocktail-detail-grid">
-    <div class="cocktail-image-column">
-        {% if cocktail.Bild %}
-            <img src="data:image/png;base64,{{ cocktail.Bild | b64encode | decode('utf-8') }}" alt="{{ cocktail.Name }}" class="cocktail-image" />
-        {% else %}
-            <img src="{{ url_for('static', filename='pictures/default-drink.png') }}" alt="Kein Bild" class="cocktail-image" />
-        {% endif %}
+<body>
+    <!-- Hauptlayout -->
+    <div class="cocktail-detail-grid">
+        <!-- Linke Spalte: Bild -->
+        <div class="cocktail-image-column">
+            {% if cocktail.Bild %}
+                <img src="data:image/png;base64,{{ cocktail.Bild | b64encode | decode('utf-8') }}" alt="{{ cocktail.Name }}" class="cocktail-image" />
+            {% else %}
+                <img src="{{ url_for('static', filename='pictures/default-drink.png') }}" alt="Kein Bild" class="cocktail-image" />
+            {% endif %}
+        </div>
+
+        <!-- Rechte Spalte: Infos -->
+        <div class="cocktail-info-column">
+            <h1 class="getränketitel">{{ cocktail.Name }}</h1>
+            <p><strong>ID:</strong> {{ cocktail.CocktailID }}</p>
+            <p><strong>Beschreibung:</strong><br> {{ cocktail.Beschreibung or "Keine Beschreibung vorhanden." }}</p>
+
+            {% if cocktail.ExtLink %}
+                <p><strong>Externer Link:</strong><br>
+                    <a href="{{ cocktail.ExtLink }}" target="_blank">{{ cocktail.ExtLink }}</a>
+                </p>
+            {% endif %}
+
+            <p><strong>Verfügbar:</strong> {{ "✅ Ja" if cocktail.verfuegbar else "❌ Nein" }}</p>
+
+            {% if zutaten %}
+                <h2>Zutaten</h2>
+                <ul>
+                    {% for zutat in zutaten %}
+                        <li>{{ zutat.Zutat }} – {{ zutat.Menge }} ml</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <!-- "Zubereiten"-Button -->
+            <form method="post" action="{{ url_for('main.cocktail_detail', cocktail_name=cocktail.Name) }}">
+                <button type="submit" class="zubereiten-button">🔄 Zubereiten</button>
+            </form>
+
+            <!-- "Zurück"-Button -->
+            <div style="margin-top: 20px;">
+                <a href="{{ url_for('main.main') }}" class="zurueck-button">← Zurück zur Übersicht</a>
+            </div>
+        </div>
     </div>
 
-    <div class="cocktail-info-column">
-        <h1 class="getränketitel">{{ cocktail.Name }}</h1>
-        <p class="cocktail-beschreibung">{{ cocktail.Beschreibung or "Keine Beschreibung vorhanden." }}</p>
-
-        {% if zutaten %}
-            <h2 class="zutaten-titel">Zutaten</h2>
-            <ul class="zutatenliste">
-                {% for zutat in zutaten %}
-                    <li>{{ zutat.Zutat }} – {{ zutat.Menge }} cl</li>
+    <!-- Ausgabe der Sequenz -->
+    {% if sequence %}
+        <div class="dispense-sequence">
+            <h2>Mix-Sequenz:</h2>
+            <ol>
+                {% for step in sequence %}
+                    <li>
+                        <strong>{{ step.type|capitalize }}</strong>: {{ step.action }}
+                        {{ step.details.amount }} ml {{ step.details.liquid }}
+                        {% if step.type == 'pump' %}
+                            (Kanal {{ step.details.pwm_channel }})
+                        {% elif step.type == 'servo' %}
+                            ({{ step.details.steps }} Schritte)
+                        {% endif %}
+                        {% if step.time_delay %}
+                            – Wartezeit: {{ step.time_delay }}s
+                        {% endif %}
+                    </li>
                 {% endfor %}
-            </ul>
-        {% endif %}
-
-        {% if cocktail.ExtLink %}
-            <a href="{{ cocktail.ExtLink }}" class="mehr-button" target="_blank">Mehr erfahren</a>
-        {% endif %}
-    </div>
-</div>
-
-<!-- Button unten links: Zurück -->
-<a href="{{ url_for('main.main') }}" class="zurueck-button">← Zurück zur Übersicht</a>
+            </ol>
+        </div>
+    {% endif %}
+</body>
