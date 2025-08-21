@@ -8,11 +8,13 @@ from logger_buffer import add_log
 import time
 import threading
 
+'''
 def start_sequence_thread(sequence):
     def run_sequence():
         execute_sequence(sequence)
     thread = threading.Thread(target=run_sequence)
     thread.start()
+'''
 
 def execute_sequence(sequence):
     set_sequence_running(True)
@@ -21,13 +23,13 @@ def execute_sequence(sequence):
     finally:
         set_sequence_running(False)
 
-    # print("[EXECUTOR] Homing Stepper...")
-    add_log("[EXECUTOR] Homing Stepper...")
+    print("[EXECUTOR] Homing Stepper...")
+    # add_log("[EXECUTOR] Homing Stepper...")
     home_stepper()  # Z.B. am Anfang der Funktion aufrufen
 
     for i, step in enumerate(sequence, 1):
-        # print(f"\n==> Step {i}: {step}")
-        add_log(f"\n==> Step {i}: {step}")
+        print(f"\n==> Step {i}: {step}")
+        # add_log(f"\n==> Step {i}: {step}")
         if step['type'] == 'pump':
             channel = step['details']['pwm_channel']
             amount = step['details']['amount']
@@ -36,7 +38,7 @@ def execute_sequence(sequence):
                 raise Exception(f"No position for pump channel {channel}")
             move_to(pump_pos)
             dispense_pump(amount, channel)
-            add_log(f"[PUMP] Dispensing {amount}ml using pump at channel {channel}")
+            # add_log(f"[PUMP] Dispensing {amount}ml using pump at channel {channel}")
 
         elif step['type'] == 'servo':
             outlet_pos = get_outlet_pos()
@@ -48,7 +50,7 @@ def execute_sequence(sequence):
             if 'time_delay' in step:
                 print(f"Waiting {step['time_delay']}s for refill...")
                 time.sleep(step['time_delay'])
-            add_log(f"[SERVO] Dispensing {amount}ml at this position (platform stationary)")
+            # add_log(f"[SERVO] Dispensing {amount}ml at this position (platform stationary)")
 
         else:
             print(f"Unknown step type: {step['type']}")
