@@ -1,7 +1,10 @@
 FROM python:3.11-slim
 
 # benötigte Systempakete für RPi GPIO
-RUN apt-get update && apt-get install -y gcc python3-dev
+RUN apt-get update && apt-get install -y \
+    gcc \
+    libmariadb_dev \
+    python3-dev
 
 RUN apt-get update && apt-get install -y \
     python3-rpi.gpio \
