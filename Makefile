@@ -7,25 +7,25 @@ BACKUP_FILE = /backup/latest.sql
 .PHONY: build up down logs ps db-restore
 
 build:
-	docker compose build
+	docker-compose build
 
 up: check-db
-	docker compose up -d
+	docker-compose up -d
 
 down:
-	docker compose down
+	docker-compose down
 
 logs:
-	docker compose logs -f
+	docker-compose logs -f
 
 ps:
-	docker compose ps
+	docker-compose ps
 
 # Check ob DB-Container läuft, wenn nicht: starten + Backup einspielen
 check-db:
 	@if [ -z "$$(docker ps -q -f name=$(DB_CONTAINER))" ]; then \
 		echo "📦 Kein laufender DB-Container gefunden, starte neuen..."; \
-		docker compose up -d db; \
+		docker-compose up -d db; \
 		echo "⏳ Warte bis MariaDB bereit ist..."; \
 		sleep 15; \
 		if [ -f $(BACKUP_FILE) ]; then \
