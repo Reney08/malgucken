@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   frontend:
-    build: ./src/frondend
+    build: ./src/frontend
     container_name: cocktail_frontend
     ports:
       - "8080:80"
