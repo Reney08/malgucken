@@ -1,4 +1,0 @@
-Flask
-mariadb
-qrcode
-RPi.GPIO

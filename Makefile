@@ -1,31 +1,39 @@
-PROJECT_NAME = myproject
-DB_CONTAINER = mariadb
-BACKUP_FILE = ./backup/latest.sql
+PROJECT_NAME = malgucken
+DB_CONTAINER = cocktail_db
+DB_USER = root
+DB_PASSWORD = Keins123!
+BACKUP_FILE = /backup/latest.sql
 
-.PHONY: up down backup restore
+.PHONY: build up down logs ps db-restore
 
-# Container starten + Backup einspielen
-up: restore
+build:
+	docker compose build
+
+up: check-db
 	docker compose up -d
 
-# Container stoppen + Backup erzeugen
-down: backup
+down:
 	docker compose down
 
-# Backup aus der laufenden DB erzeugen
-backup:
-	@echo "🔄 Dumping current database to $(BACKUP_FILE)..."
-	docker exec $(DB_CONTAINER) sh -c 'exec mysqldump -u root -p"$${MARIADB_ROOT_PASSWORD}" "$${MARIADB_DATABASE}"' > $(BACKUP_FILE)
-	@echo "✅ Backup saved."
+logs:
+	docker compose logs -f
 
-# Backup in DB einspielen (nur wenn Datei existiert)
-restore:
-	@if [ -f $(BACKUP_FILE) ]; then \
-		echo "📥 Restoring database from $(BACKUP_FILE)..."; \
-		docker compose up -d $(DB_CONTAINER); \
-		sleep 10; \
-		docker exec -i $(DB_CONTAINER) sh -c 'exec mysql -u root -p"$${MARIADB_ROOT_PASSWORD}" "$${MARIADB_DATABASE}"' < $(BACKUP_FILE); \
-		echo "✅ Restore complete."; \
+ps:
+	docker compose ps
+
+# Check ob DB-Container läuft, wenn nicht: starten + Backup einspielen
+check-db:
+	@if [ -z "$$(docker ps -q -f name=$(DB_CONTAINER))" ]; then \
+		echo "📦 Kein laufender DB-Container gefunden, starte neuen..."; \
+		docker compose up -d db; \
+		echo "⏳ Warte bis MariaDB bereit ist..."; \
+		sleep 15; \
+		if [ -f $(BACKUP_FILE) ]; then \
+			echo "💾 Importiere Backup..."; \
+			docker exec -i $(DB_CONTAINER) sh -c 'exec mysql -u$(DB_USER) -p$(DB_PASSWORD) $(DB_NAME)' < $(BACKUP_FILE); \
+		else \
+			echo "⚠️ Kein Backup gefunden unter $(BACKUP_FILE)"; \
+		fi \
 	else \
-		echo "⚠️  No backup file found, skipping restore."; \
+		echo "✅ MariaDB läuft bereits, kein neuer Container nötig."; \
 	fi
