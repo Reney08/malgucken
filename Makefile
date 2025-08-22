@@ -1,31 +1,33 @@
+DOCKER_COMPOSE = docker-compose -f code/docker-compose.yml
 PROJECT_NAME = malgucken
 DB_CONTAINER = cocktail_db
 DB_USER = root
 DB_PASSWORD = Keins123!
+DB_NAME = BarbotDB
 BACKUP_FILE = /backup/latest.sql
 
-.PHONY: build up down logs ps db-restore
+.PHONY: build up down logs ps check-db
 
 build:
-	docker-compose build
+	$(DOCKER_COMPOSE) build
 
 up: check-db
-	docker-compose up -d
+	$(DOCKER_COMPOSE) up -d
 
 down:
-	docker-compose down
+	$(DOCKER_COMPOSE) down
 
 logs:
-	docker-compose logs -f
+	$(DOCKER_COMPOSE) logs -f
 
 ps:
-	docker-compose ps
+	$(DOCKER_COMPOSE) ps
 
 # Check ob DB-Container läuft, wenn nicht: starten + Backup einspielen
 check-db:
 	@if [ -z "$$(docker ps -q -f name=$(DB_CONTAINER))" ]; then \
 		echo "📦 Kein laufender DB-Container gefunden, starte neuen..."; \
-		docker-compose up -d db; \
+		$(DOCKER_COMPOSE) up -d db; \
 		echo "⏳ Warte bis MariaDB bereit ist..."; \
 		sleep 15; \
 		if [ -f $(BACKUP_FILE) ]; then \
