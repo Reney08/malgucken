@@ -4,7 +4,7 @@ DB_CONTAINER = cocktail_db
 DB_USER = root
 DB_PASSWORD = Keins123!
 DB_NAME = BarbotDB
-BACKUP_FILE = /backup/latest.sql
+BACKUP_FILE = backup/latest.sql
 
 .PHONY: build up down logs ps check-db
 
