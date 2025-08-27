@@ -35,11 +35,10 @@ check-db:
 		echo "✅ MariaDB läuft bereits, kein neuer Container nötig."; \
 	fi
 
-# Backup importieren (mit mariadb-Client statt mysql!)
 import-db:
 	@if [ -f $(BACKUP_FILE) ]; then \
 		echo "💾 Importiere Backup aus $(BACKUP_FILE)..."; \
-		docker exec -i $(DB_CONTAINER) sh -c 'exec mariadb -u$(DB_USER) -p$(DB_PASSWORD) $(DB_NAME)' < $(BACKUP_FILE); \
+		docker exec -i $(DB_CONTAINER) sh -c 'exec mariadb -h127.0.0.1 -u$(DB_USER) -p$(DB_PASSWORD) $(DB_NAME)' < $(BACKUP_FILE); \
 	else \
 		echo "⚠️ Kein Backup gefunden unter $(BACKUP_FILE)"; \
 	fi
