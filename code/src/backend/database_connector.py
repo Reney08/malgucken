@@ -3,7 +3,7 @@ import mariadb
 conn = mariadb.connect(
     username='barbot',
     password='Keins123!',
-    host='127.0.0.1',
+    host='db',
     port=3306,
     database='BarbotDB'
 )
