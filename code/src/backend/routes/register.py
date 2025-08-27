@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash
 from werkzeug.security import generate_password_hash
 from database_interaction import safe_login_data
 
-register_bp = Blueprint('register', __name__, url_prefix='/register')
+register_bp = Blueprint('register', __name__, url_prefix='/register', template_folder='../../frontend/templates')
 
 @register_bp.route('/', methods=['GET', 'POST'])
 def register():
