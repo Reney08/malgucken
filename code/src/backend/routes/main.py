@@ -8,7 +8,7 @@ from usables.stepper import move_to
 
 # from execute_sequence import start_sequence_thread
 
-main_bp = Blueprint('main', __name__, url_prefix='/main')
+main_bp = Blueprint('main', __name__, url_prefix='/main', template_folder='../../frontend/templates')
 
 @main_bp.route('/')
 @login_required
