@@ -33,10 +33,14 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=Keins123!
       - MYSQL_DATABASE=BarbotDB
+      - MYSQL_USER=barbot
+      - MYSQL_PASSWORD=Keins123!
     volumes:
       - db_data:/var/lib/mysql
+      - ./sql_backup.sql:/docker-entrypoint-initdb.d/sql_backup.sql
     networks:
       - backend_net
+
 
 volumes:
   db_data:
