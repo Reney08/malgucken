@@ -22,7 +22,7 @@ services:
     privileged: true   # falls nötig für RPi GPIO
     environment:
       - DB_HOST=db
-      - DB_USER=root
+      - DB_USER=barbot
       - DB_PASSWORD=Keins123!
       - DB_NAME=BarbotDB
 
