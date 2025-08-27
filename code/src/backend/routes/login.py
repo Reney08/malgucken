@@ -6,7 +6,7 @@ import qrcode
 import io
 
 
-login_bp = Blueprint('login', __name__, url_prefix='/login')
+login_bp = Blueprint('login', __name__, url_prefix='/login', template_folder='../../frontend/templates')
 
 @login_bp.route('/', methods=['GET', 'POST'])
 def login():
