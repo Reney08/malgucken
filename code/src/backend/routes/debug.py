@@ -5,7 +5,7 @@ from logger_buffer import get_logs
 
 from logger_buffer import is_sequence_running
 
-debug_bp = Blueprint('debug', __name__, url_prefix='/debug')
+debug_bp = Blueprint('debug', __name__, url_prefix='/debug', template_folder='../../frontend/templates')
 
 @debug_bp.route('/logs')
 def debug_logs():
