@@ -8,7 +8,7 @@ import io
 
 login_bp = Blueprint('login',
                      __name__, url_prefix='/login',
-                     template_folder='src/frontend/templates')
+                     template_folder='/src/frontend/templates/')
 
 @login_bp.route('/', methods=['GET', 'POST'])
 def login():

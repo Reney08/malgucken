@@ -8,7 +8,10 @@ from usables.stepper import move_to
 
 # from execute_sequence import start_sequence_thread
 
-main_bp = Blueprint('main', __name__, url_prefix='/main', template_folder='../../frontend/templates')
+main_bp = Blueprint('main',
+                    __name__,
+                    url_prefix='/main',
+                    template_folder='/src/frontend/templates/')
 
 @main_bp.route('/')
 @login_required
@@ -17,7 +20,7 @@ def main():
     cocktails = get_cocktails()
     move_to(5000)
     # add_log(f"{len(cocktails)} cocktails found")
-    return render_template('main/../../frontend/templates/main/main.html', cocktails=cocktails)
+    return render_template('/main/main.html', cocktails=cocktails)
 
 @main_bp.route('/cocktail/<cocktail_name>', methods=['GET', 'POST'])
 @login_required
@@ -57,7 +60,7 @@ def cocktail_detail(cocktail_name):
 
     # Wenn GET
     return render_template(
-        'main/../../frontend/templates/main/selected_cocktail.html',
+        '/main/selected_cocktail.html',
         cocktail=cocktail,
         zutaten=zutaten
     )
