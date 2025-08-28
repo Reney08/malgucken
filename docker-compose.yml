@@ -16,7 +16,7 @@ services:
       - db_data:/var/lib/mysql
 
   web:
-    build: ./src/Dockerfile
+    build: src/Dockerfile
     container_name: flaskapp
     restart: always
     environment:

@@ -17,7 +17,7 @@ def main():
     cocktails = get_cocktails()
     move_to(5000)
     # add_log(f"{len(cocktails)} cocktails found")
-    return render_template('main/main.html', cocktails=cocktails)
+    return render_template('main/../../frontend/templates/main/main.html', cocktails=cocktails)
 
 @main_bp.route('/cocktail/<cocktail_name>', methods=['GET', 'POST'])
 @login_required
@@ -57,7 +57,7 @@ def cocktail_detail(cocktail_name):
 
     # Wenn GET
     return render_template(
-        'main/selected_cocktail.html',
+        'main/../../frontend/templates/main/selected_cocktail.html',
         cocktail=cocktail,
         zutaten=zutaten
     )

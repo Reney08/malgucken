@@ -12,9 +12,9 @@ def register():
         terms_accepted = request.form.get('terms') == 'on'
         if not terms_accepted:
             flash('Bitte Nutzungsbedingungen akzeptieren!')
-            return render_template('register/register.html')
+            return render_template('register/../../frontend/templates/register/register.html')
         hashed_pw = generate_password_hash(password)
         safe_login_data(username, hashed_pw, terms_accepted)
         flash('Registrierung erfolgreich! Bitte logge dich ein.')
         return redirect(url_for('login.login'))
-    return render_template('register/register.html')
+    return render_template('register/../../frontend/templates/register/register.html')
