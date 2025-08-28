@@ -63,7 +63,8 @@ restore:
 		echo "Bitte Backup-Datei angeben, z. B.:"; \
 		echo "  make restore FILE=$(BACKUP_DIR)/latest.sql"; \
 		exit 1; \
-	fi
-	@echo "Stelle Backup $(FILE) wieder her..."
-	docker exec -i mariadb mariadb -u$$MYSQL_USER -p$$MYSQL_PASSWORD $$MYSQL_DATABASE < $(FILE)
-	@echo "Restore abgeschlossen."
+	fi; \
+	echo "Stelle Backup $(FILE) wieder her..."; \
+	docker exec -i mariadb mariadb -u$$MYSQL_USER -p$$MYSQL_PASSWORD $$MYSQL_DATABASE < $(FILE); \
+	echo "Restore abgeschlossen."
+
