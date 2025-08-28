@@ -9,7 +9,7 @@ build:
 up:
 	$(COMPOSE) up -d
 
-down: backup
+down:
 	$(COMPOSE) down
 
 logs:
@@ -61,7 +61,7 @@ db-shell:
 restore:
 	@if [ -z "$(FILE)" ]; then \
 		echo "Bitte Backup-Datei angeben, z. B.:"; \
-		echo "  make restore FILE=$(BACKUP_DIR)/Datenbankbackup_2025-08-28_15-42-10.sql"; \
+		echo "  make restore FILE=$(BACKUP_DIR)/latest.sql"; \
 		exit 1; \
 	fi
 	@echo "Stelle Backup $(FILE) wieder her..."
