@@ -49,7 +49,7 @@ ps:
 	@docker ps
 
 build:
-	$(compose) build
+	$(COMPOSE) build
 	@echo "Alle Container wurden gebaut."
 # ----------------------------
 # MariaDB Backup importieren
