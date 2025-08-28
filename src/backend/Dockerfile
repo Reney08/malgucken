@@ -1,4 +1,4 @@
-FROM python:3.11-slim
+FROM python:3.11-bullseye
 
 # Arbeitsverzeichnis setzen
 WORKDIR .
@@ -7,9 +7,7 @@ WORKDIR .
 RUN apt-get update && apt-get install -y \
     gcc \
     libmariadb-dev \
-    python3-dev
-
-RUN apt-get update && apt-get install -y \
+    python3-dev \
     # python3-rpi.gpio \
     && rm -rf /var/lib/apt/lists/*
 
