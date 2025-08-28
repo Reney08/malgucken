@@ -20,6 +20,28 @@ restart: down up
 ps:
 	$(COMPOSE) ps
 
+# ----------------------------
+# Einzelne Container steuern
+# ----------------------------
+up-db:
+	$(COMPOSE) up -d db
+
+up-web:
+	$(COMPOSE) up -d web
+
+down-db:
+	$(COMPOSE) stop db
+
+down-web:
+	$(COMPOSE) stop web
+
+restart-db: down-db up-db
+
+restart-web: down-web up-web
+
+# ----------------------------
+# DB-Befehle
+# ----------------------------
 db-shell:
 	docker exec -it mariadb mariadb -u$$MYSQL_USER -p$$MYSQL_PASSWORD $$MYSQL_DATABASE
 
@@ -33,7 +55,6 @@ backup:
 	# Nur die 5 neuesten behalten
 	ls -1t $(BACKUP_DIR)/Datenbankbackup_*.sql | tail -n +6 | xargs -r rm --; \
 	echo "Ältere Backups entfernt, es bleiben maximal 5."
-
 
 restore:
 	@if [ -z "$(FILE)" ]; then \
