@@ -4,3 +4,4 @@ mysql-connector-python==9.0.0
 RPi.GPIO==0.7.1
 mariadb
 qrcode
+time
