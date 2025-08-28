@@ -26,6 +26,8 @@ help:
 	@echo "  make logs      # Show logs for all containers"
 	@echo "  make db-shell  # Open MariaDB shell"
 	@echo "  make import-db # Import Backup manually"
+	@echo "  make build     # build a new Image"
+	@echo "  make ps		# show all running containers"
 
 # ----------------------------
 # Container starten / stoppen
@@ -45,6 +47,10 @@ logs:
 
 ps:
 	@docker ps
+
+build:
+	$(compose) build
+	@echo "Alle Container wurden gebaut."
 # ----------------------------
 # MariaDB Backup importieren
 # ----------------------------
