@@ -1,8 +1,8 @@
 from flask import Flask, redirect, session
 from routes import *
 app = Flask(__name__,
-            template_folder='../frontend/templates',
-            static_folder='../frontend/static'
+            template_folder='/src/frontend/templates',
+            static_folder='/src/frontend/static'
             )
 app.secret_key = 'supergeheimer_schluessel_1234567890'
 
