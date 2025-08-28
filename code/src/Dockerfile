@@ -1,5 +1,8 @@
 FROM python:3.11-slim
 
+# Arbeitsverzeichnis setzen
+WORKDIR /app
+
 # benötigte Systempakete für RPi GPIO
 RUN apt-get update && apt-get install -y \
     gcc \
@@ -10,11 +13,12 @@ RUN apt-get update && apt-get install -y \
     python3-rpi.gpio \
     && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /app
-COPY . /app
-
-# Python-Abhängigkeiten (falls requirements.txt existiert)
+# Requirements installieren
+COPY requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
+
+# Flask-App kopieren
+COPY . .
 
 # Flask starten
 CMD ["python", "app.py"]
