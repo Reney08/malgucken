@@ -45,16 +45,18 @@ restart-web: down-web up-web
 db-shell:
 	docker exec -it mariadb mariadb -u$$MYSQL_USER -p$$MYSQL_PASSWORD $$MYSQL_DATABASE
 
-backup:
-	@mkdir -p $(BACKUP_DIR)
-	@timestamp=$$(date +"Datenbankbackup_%Y-%m-%d_%H-%M-%S.sql"); \
-	echo "Erstelle Backup $$timestamp ..."; \
-	docker exec mariadb mariadb-dump -u$$MYSQL_USER -p$$MYSQL_PASSWORD $$MYSQL_DATABASE > $(BACKUP_DIR)/$$timestamp; \
-	cp $(BACKUP_DIR)/$$timestamp $(BACKUP_DIR)/latest.sql; \
-	echo "Backup gespeichert unter $(BACKUP_DIR)/$$timestamp und aktualisiert latest.sql"; \
-	# Nur die 5 neuesten behalten
-	ls -1t $(BACKUP_DIR)/Datenbankbackup_*.sql | tail -n +6 | xargs -r rm --; \
-	echo "Ältere Backups entfernt, es bleiben maximal 5."
+
+#backup:
+#	@mkdir -p $(BACKUP_DIR)
+#	@timestamp=$$(date +"Datenbankbackup_%Y-%m-%d_%H-%M-%S.sql"); \
+#	echo "Erstelle Backup $$timestamp ..."; \
+#	docker exec mariadb mariadb-dump -u$$MYSQL_USER -p$$MYSQL_PASSWORD $$MYSQL_DATABASE > $(BACKUP_DIR)/$$timestamp; \
+#	cp $(BACKUP_DIR)/$$timestamp $(BACKUP_DIR)/latest.sql; \
+#	echo "Backup gespeichert unter $(BACKUP_DIR)/$$timestamp und aktualisiert latest.sql"; \
+#	# Nur die 5 neuesten behalten
+#	ls -1t $(BACKUP_DIR)/Datenbankbackup_*.sql | tail -n +6 | xargs -r rm --; \
+#	echo "Ältere Backups entfernt, es bleiben maximal 5."
+
 
 restore:
 	@if [ -z "$(FILE)" ]; then \
