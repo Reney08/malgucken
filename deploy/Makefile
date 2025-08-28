@@ -43,6 +43,8 @@ restart: down up
 logs:
 	$(COMPOSE) logs -f
 
+ps:
+	@docker ps
 # ----------------------------
 # MariaDB Backup importieren
 # ----------------------------
