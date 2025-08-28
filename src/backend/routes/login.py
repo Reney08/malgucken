@@ -26,10 +26,9 @@ def login():
 
 @login_bp.route('/qr')
 def login_qr():
-    server_ip = 'localhost'
-    port = 5000
-    login_url = f'http://{server_ip}:{port}/login/'
-
+    # erzeugt absolute URL, z.B. http://127.0.0.1:5000/login/
+    login_url = url_for('login.login',
+                        _external=True)
     img = qrcode.make(login_url)
     buf = io.BytesIO()
     img.save(buf)
