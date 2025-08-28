@@ -10,7 +10,7 @@ BACKUP_FILE = ../backup/latest.sql
 # DB Service-Name aus docker-compose
 DB_SERVICE = db
 DB_USER ?= root
-DB_PASSWORD ?= rootpassword
+DB_PASSWORD ?= Keins123!
 DB_NAME ?= BarbotDB
 
 # Docker Netzwerk (wird automatisch aus Projektname erstellt)
