@@ -1,7 +1,7 @@
 FROM python:3.11-slim
 
 # Arbeitsverzeichnis setzen
-WORKDIR /app
+WORKDIR .
 
 # benötigte Systempakete für RPi GPIO
 RUN apt-get update && apt-get install -y \
