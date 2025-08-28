@@ -4,7 +4,7 @@ SHELL := /bin/bash
 # Makefile für Docker-Setup im deploy-Ordner
 
 COMPOSE = docker-compose --env-file ../.env -f docker-compose.yml
-BACKUP_DIR = ../db/backup
+BACKUP_DIR = /malgucken/db/backup
 
 DB_SERVICE   = mariadb
 DB_USER      = $$MYSQL_USER
