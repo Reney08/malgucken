@@ -1,3 +1,6 @@
+# weil Debian scheisse ist
+SHELL := /bin/bash
+
 # Makefile für Docker-Setup im deploy-Ordner
 
 COMPOSE = docker-compose --env-file ../.env -f docker-compose.yml
