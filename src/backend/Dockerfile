@@ -8,9 +8,9 @@ RUN apt-get update && apt-get install -y \
     gcc \
     cmake \
     git  \
-    libssel-dev \
+    libssl-dev \
     make  \
-    pgk-config \
+    pkg-config \
     python3-dev \
     # python3-rpi.gpio \
     && rm -rf /var/lib/apt/lists/*
