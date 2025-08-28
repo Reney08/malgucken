@@ -22,7 +22,7 @@ def login():
             return redirect(url_for('main.main'))
         else:
             flash('Benutzername oder Passwort falsch!')
-    return render_template('login/../../frontend/templates/login/login.html')
+    return render_template('login/login.html')
 
 @login_bp.route('/qr')
 def login_qr():
