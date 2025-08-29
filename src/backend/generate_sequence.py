@@ -5,7 +5,7 @@ from database_interaction import (
     get_servo_positions_from_db
 )
 
-def create_cocktail_sequence(cocktail_name, initial_weight=0):
+def create_cocktail_sequence(cocktail_name: str, initial_weight=0):
     sequence = []
     ingredients = get_ingredients_for_cocktail(cocktail_name)
     if not ingredients:

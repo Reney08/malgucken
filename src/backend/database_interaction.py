@@ -1,13 +1,13 @@
 from database_connector import conn
 
-def get_user_by_username(username):
+def get_user_by_username(username: str):
     cur = conn.cursor(dictionary=True)
     cur.execute("SELECT * FROM users WHERE username = ?", (username,))
     user = cur.fetchone()
     cur.close()
     return user
 
-def safe_login_data(username, password, checkbox):
+def safe_login_data(username: str, password: str, checkbox: bool):
     cur = conn.cursor()
     cur.execute("INSERT INTO users (username, password, agb_accepted) VALUES (?, ?, ?)", (username, password, checkbox))
     conn.commit()
@@ -28,7 +28,7 @@ def get_cocktail_by_name(name):
     cur.close()
     return row
 
-def get_ingredients_for_cocktail(cocktail_name):
+def get_ingredients_for_cocktail(cocktail_name: str):
     cur = conn.cursor(dictionary=True)
     cur.execute("""
         SELECT Z.Name AS Zutat, R.Menge AS Menge
@@ -115,5 +115,15 @@ def get_all_zapfstellen():
     cur = conn.cursor(dictionary=True)
     cur.execute("SELECT * FROM Zapfstelle")
     data = cur.fetchall()
+    cur.close()
+    return data
+
+def get_single_zapfstelle(id: int):
+    """
+    get single instance of Zapfstelle
+    """
+    cur = conn.cursor(dictionary=True)
+    cur.execute("SELECT * FROM ZapfstelleID WHERE = ? LIMIT 1", (id,))
+    data = cur.fetchone()
     cur.close()
     return data

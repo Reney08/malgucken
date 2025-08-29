@@ -24,7 +24,7 @@ def main():
 
 @main_bp.route('/cocktail/<cocktail_name>', methods=['GET', 'POST'])
 @login_required
-def cocktail_detail(cocktail_name):
+def cocktail_detail(cocktail_name: str):
     cocktail = get_cocktail_by_name(cocktail_name)
     # add_log(f"on page: {cocktail}")
 
