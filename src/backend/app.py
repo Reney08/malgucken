@@ -19,6 +19,7 @@ app.register_blueprint(login_bp)
 app.register_blueprint(register_bp)
 app.register_blueprint(main_bp)
 app.register_blueprint(debug_bp)
+app.register_blueprint(zapfstelle_bp)
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5000)

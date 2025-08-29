@@ -1,9 +1,9 @@
 # routes/debug.py
 
 from flask import Blueprint, render_template, jsonify
-from ..logger_buffer import get_logs
+from logger_buffer import get_logs
 
-from ..logger_buffer import is_sequence_running
+from logger_buffer import is_sequence_running
 
 debug_bp = Blueprint('debug',
                      __name__,

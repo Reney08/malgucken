@@ -1,9 +1,9 @@
 from flask import Blueprint, render_template, request, redirect, url_for
-from ..database_interaction import get_cocktails, get_cocktail_by_name, get_ingredients_for_cocktail
-from ..generate_sequence import create_cocktail_sequence
-from ..session_ueberpruefer import login_required
-from ..execute_sequence import execute_sequence
-from ..usables.stepper import move_to
+from database_interaction import get_cocktails, get_cocktail_by_name, get_ingredients_for_cocktail
+from generate_sequence import create_cocktail_sequence
+from session_ueberpruefer import login_required
+from execute_sequence import execute_sequence
+from usables.stepper import move_to
 # from logger_buffer import add_log
 
 # from execute_sequence import start_sequence_thread

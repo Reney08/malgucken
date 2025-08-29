@@ -1,4 +1,4 @@
-from ..database_interaction import get_all_zapfstellen, get_single_zapfstelle, set_zapfstelle, add_zapfstelle, delete_zapfstelle
+from database_interaction import get_all_zapfstellen, get_single_zapfstelle, set_zapfstelle, add_zapfstelle, delete_zapfstelle
 from flask import Blueprint, render_template, request, redirect, url_for, session, flash, send_file, current_app
 
 zapfstelle_bp = Blueprint('zapfstelle_bp',
@@ -8,8 +8,8 @@ zapfstelle_bp = Blueprint('zapfstelle_bp',
 
 @zapfstelle_bp.route('/', methods=['GET', 'POST'])
 def get_all_zapfstelle():
-    zapfstelle = get_all_zapfstelle()
-    render_template('zapfstelle/get_all.html')
+    return "Hallo Welt"
+    # render_template('zapfstelle/get_all.html')
 
 @zapfstelle_bp.route('/get_single', methods=['GET', 'POST'])
 def get_single_zapfstelle():

@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from werkzeug.security import generate_password_hash
-from ..database_interaction import safe_login_data
+from database_interaction import safe_login_data
 
 register_bp = Blueprint('register',
                         __name__,
