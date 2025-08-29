@@ -127,3 +127,66 @@ def get_single_zapfstelle(id: int):
     data = cur.fetchone()
     cur.close()
     return data
+
+def set_zapfstelle(input: int):
+    """
+    alter a single think of a Zapfstelle
+    """
+    match input:
+        case "1":
+            update_schienen_pos(1, 50)
+        case "2":
+            update_pumpe(1, False)
+        case "3":
+            update_pumpen_nr(1,10)
+        case "4":
+            update_fuellmenge(1, 100)
+
+def update_schienen_pos(id: int, schienenpos: int):
+    """
+    update SchienenPos of given Zapfstelle
+    """
+    cur = conn.cursor(dictionary=True)
+    cur.execute("UPDATE Zapfstelle SET SchienenPos = ? WHERE ID = ?", (schienenpos, id))
+    cur.close()
+
+def update_pumpe(id: int, pumpe: int):
+    """
+    update if pump is there of given Zapfstelle
+    """
+    cur = conn.cursor(dictionary=True)
+    cur.execute("UPDATE Zapfstelle SET Pumpe = ? WHERE ID = ?", (pumpe, id))
+    cur.close()
+
+def update_pumpen_nr(id: int, pumpennr: int):
+    """
+    update pumpennr of given Zapfstelle
+    """
+    cur = conn.cursor(dictionary=True)
+    cur.execute("UPDATE Zapfstelle SET PumpenNR = ? WHERE ID = ?", (pumpennr, id))
+    cur.close()
+
+def update_fuellmenge(id: int, fuellmenge: int):
+    """
+    update fuellmenge of given Zapfstelle
+    """
+    cur = conn.cursor(dictionary=True)
+    cur.execute("UPDATE Zapfstelle SET FuelMenge = ? WHERE ID = ?", (fuellmenge, id))
+    cur.close()
+
+def add_zapfstelle(schienenpos: int, pumpe: bool, pumpen_nr: int, fuellmenge: int):
+    """
+    add new Zapfstelle
+    """
+    cur = conn.cursor(dictionary=True)
+    cur.execute("INSERT INTO Zapfstelle (SchienenPos, Pumpe, PumpenNR, Fuellmenge) VALUES (?, ?, ?, ?)",
+                (schienenpos, pumpe, pumpen_nr, fuellmenge))
+    cur.close()
+
+def delete_zapfstelle(id: int):
+    """
+    delete Zapfstelle
+    """
+    cur = conn.cursor(dictionary=True)
+    cur.execute("DELETE FROM Zapfstelle WHERE ID = ?", (id,))
+    cur.close()

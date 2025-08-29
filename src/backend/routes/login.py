@@ -1,13 +1,14 @@
 from flask import Blueprint, render_template, request, redirect, url_for, session, flash, send_file, current_app
 from werkzeug.security import check_password_hash
-from database_interaction import get_user_by_username
+from ..database_interaction import get_user_by_username
 
 import qrcode
 import io
 
 
 login_bp = Blueprint('login',
-                     __name__, url_prefix='/login',
+                     __name__,
+                     url_prefix='/login',
                      template_folder='/src/frontend/templates/')
 
 @login_bp.route('/', methods=['GET', 'POST'])
