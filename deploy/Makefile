@@ -1,8 +1,11 @@
 # Makefile für /malgucken/deploy
 SHELL := /bin/bash
 
+#
+ENV_FILE = ../.env
+
 # Docker Compose Kommando
-COMPOSE = docker-compose -f docker-compose.yml
+COMPOSE = docker-compose --env-file $(ENV_FILE) -f docker-compose.yml
 
 # Backup-Datei
 BACKUP_FILE = ../backup/latest.sql

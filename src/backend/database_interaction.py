@@ -106,3 +106,14 @@ def get_station_positions():
             station_positions['outlet'] = pos
 
     return station_positions
+
+
+def get_all_zapfstellen():
+    """
+    get all Zapfstelle information (SchienenPos and PumpenNR) safed in Database
+    """
+    cur = conn.cursor(dictionary=True)
+    cur.execute("SELECT * FROM Zapfstelle")
+    data = cur.fetchall()
+    cur.close()
+    return data
